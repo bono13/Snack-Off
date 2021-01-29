@@ -2,6 +2,5 @@
 
 // Handle the index
 exports.getIndex = async (req, res, next) => {
-    res.render('generic/index.ejs');
-    res.end();
+	res.render('generic/index.ejs');
 };

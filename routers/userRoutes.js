@@ -1,14 +1,10 @@
 // Handle user routes
-
-const path = require('path');
-
 const express = require('express');
+
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.write('Welcome');
-    res.end();
-});
+router.post('/create', userController.postAddUser);
 
 module.exports = router;
