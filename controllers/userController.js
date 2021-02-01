@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 
 exports.getLogin = async (req, res) => {
 	try {
-		await res.render('user/login', {error: false});
+		await res.render('user/login', { error: false, path: '/login' });
 	} catch (err) {
 		console.log(err);
 	}
@@ -14,9 +14,9 @@ exports.postLogin = async (req, res) => {
 	try {
 		const user = await User.findOne(req.body);
 		if (!user) {
-			res.render('user/login', {error: true});
+			res.render('user/login', { error: true, path: '/login' });
 		} else {
-			res.render('generic/index');
+			res.render('generic/index', { path: '/' });
 		}
 		console.log(user);
 	} catch (err) {
@@ -26,7 +26,7 @@ exports.postLogin = async (req, res) => {
 
 exports.getRegister = async (req, res) => {
 	try {
-		await res.render('user/register');
+		await res.render('user/register', { path: '/register' });
 	} catch (err) {
 		console.log(err);
 	}
