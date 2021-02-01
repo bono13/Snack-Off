@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Add routes
-app.use('/user', userRoutes);
+app.use('/', userRoutes);
 app.use('/', genericRoutes);
 
 // Get port

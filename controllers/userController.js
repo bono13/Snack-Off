@@ -2,12 +2,41 @@
 
 const User = require('../models/userModel');
 
-exports.postAddUser = async (req, res) => {
+exports.getLogin = async (req, res) => {
+	try {
+		await res.render('user/login', {error: false});
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.postLogin = async (req, res) => {
+	try {
+		const user = await User.findOne(req.body);
+		if (!user) {
+			res.render('user/login', {error: true});
+		} else {
+			res.render('generic/index');
+		}
+		console.log(user);
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.getRegister = async (req, res) => {
+	try {
+		await res.render('user/register');
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.postRegister = async (req, res) => {
 	const user = new User(req.body);
 	try {
 		await user.save();
-		console.log('USER ADDED');
-		res.status(200).json('Created new User');
+		res.status(200).redirect('/');
 	} catch (err) {
 		console.log(err);
 	}
