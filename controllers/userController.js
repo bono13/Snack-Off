@@ -1,10 +1,11 @@
 // Controller from user related routes
+const { validationResult } = require('express-validator');
 
 const User = require('../models/userModel');
 
 exports.getLogin = async (req, res) => {
 	try {
-		await res.render('user/login', { error: false, path: '/login' });
+		await res.render('user/login', { errors: null, path: '/login' });
 	} catch (err) {
 		console.log(err);
 	}
@@ -14,11 +15,11 @@ exports.postLogin = async (req, res) => {
 	try {
 		const user = await User.findOne(req.body);
 		if (!user) {
-			res.render('user/login', { error: true, path: '/login' });
+			console.log('user not found');
+			return res.render('user/login', { errors: [{ msg: 'User not found' }], path: '/login' });
 		} else {
-			res.render('generic/index', { path: '/' });
+			return res.render('generic/index', { path: '/' });
 		}
-		console.log(user);
 	} catch (err) {
 		console.log(err);
 	}

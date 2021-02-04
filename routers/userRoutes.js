@@ -2,12 +2,13 @@
 const express = require('express');
 
 const userController = require('../controllers/userController');
+const userValidator = require('../validators/userValidators');
 
 const router = express.Router();
 
 router.get('/login', userController.getLogin);
 
-router.post('/login', userController.postLogin);
+router.post('/login', userValidator.loginValidator , userController.postLogin);
 
 router.get('/register', userController.getRegister);
 
